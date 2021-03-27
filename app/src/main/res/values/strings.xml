@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MovieDetails</string>
+    <string name="a_movie_title">A Movie Title</string>
+    <string name="_1990">1990</string>
+    <string name="comedy_drama">Comedy, Drama</string>
+    <string name="likes">Likes</string>
+    <string name="likes_number">1.2K</string>
+    <string name="_10_849">10.849</string>
 </resources>
