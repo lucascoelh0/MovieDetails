@@ -1,9 +1,5 @@
 package com.example.moviedetails.model
 
-data class Results(
-    val movies: List<Movie>
-)
-
 data class Movie(
     val genres: List<Genre>,
     val popularity: Double,
@@ -16,4 +12,15 @@ data class Movie(
 data class Genre(
     val id: Int,
     val name: String
+)
+
+data class SimilarMoviesList(
+    val results: List<SimilarMovie>,
+)
+
+data class SimilarMovie(
+    val genre_ids: List<Int>,
+    val poster_path: String,
+    val release_date: String,
+    val title: String,
 )
