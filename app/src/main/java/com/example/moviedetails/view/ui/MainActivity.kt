@@ -10,6 +10,7 @@ import com.example.moviedetails.databinding.ActivityMainBinding
 import com.example.moviedetails.service.repository
 import com.example.moviedetails.view.adapter.MovieAdapter
 import com.example.moviedetails.viewmodel.MainViewModel
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private val model by viewModels<MainViewModel>() {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return MainViewModel(repository) as T
+                return MainViewModel() as T
             }
         }
     }
@@ -28,23 +29,26 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        model.initializeDB(this)
         model.getMovie()
         model.popListMovies()
+        model.popMapGenres()
 
         model.movie.observe(this, {
 
-            val movie = model.movie.value
+            val movie = model.movie.value!!
 
-            model.loadImage(binding.imagePoster, movie?.poster_path)
+            model.loadImage(binding.imagePoster, movie.poster_path)
 
             binding.apply {
-                textTitle.text = movie?.title
-                textPopularity.text = movie?.popularity.toString()
+                textTitle.text = movie.title
+                textLikeCount.text = model.getFormatedLike(movie.vote_count, Locale.ENGLISH)
+                textPopularity.text = movie.popularity.toInt().toString()
             }
         })
 
         model.listMovie.observe(this, {
-            movieAdapter = model.listMovie.value?.let { MovieAdapter(it) }!!
+            movieAdapter = model.listMovie.value?.let { MovieAdapter(it, model.mapGenres) }!!
 
             val recyclerView = binding.recyclerMovies
             recyclerView.apply {
@@ -53,5 +57,9 @@ class MainActivity : AppCompatActivity() {
                 setHasFixedSize(true)
             }
         })
+
+        binding.imageHeart.setOnClickListener {
+            model.changeLike(binding.imageHeart)
+        }
     }
 }

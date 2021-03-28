@@ -9,7 +9,7 @@
         android:layout_width="80dp"
         android:layout_height="110dp"
         android:scaleType="fitXY"
-        android:src="@drawable/poster_placeholder"
+        android:src="@drawable/no_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,17 +35,19 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:text="@string/_1990"
+        app:layout_constraintBottom_toBottomOf="@+id/text_genres"
         app:layout_constraintStart_toEndOf="@id/image_poster"
         app:layout_constraintTop_toBottomOf="@id/text_title" />
 
     <TextView
         android:id="@+id/text_genres"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/comedy_drama"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_year"
         app:layout_constraintTop_toBottomOf="@+id/text_title" />
 
