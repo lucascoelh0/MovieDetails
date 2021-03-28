@@ -1,6 +1,5 @@
 package com.example.moviedetails.view.ui
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -9,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedetails.databinding.ActivityMainBinding
-import com.example.moviedetails.service.repository
 import com.example.moviedetails.view.adapter.MovieAdapter
 import com.example.moviedetails.viewmodel.MainViewModel
 import java.util.*
@@ -33,8 +31,10 @@ class MainActivity : AppCompatActivity() {
 
         model.initializeDB(this)
         model.getMovie()
-        model.popListMovies()
-        model.popMapGenres()
+
+        model.dbInitialized.observe(this, {
+            model.popMapGenres()
+        })
 
         model.movie.observe(this, {
 
@@ -49,8 +49,14 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        model.mapGenres.observe(this, {
+            model.mapGenres.value
+            model.popListMovies()
+        })
+
         model.listMovie.observe(this, {
-            movieAdapter = model.listMovie.value?.let { MovieAdapter(it, model.mapGenres) }!!
+
+            movieAdapter = model.listMovie.value?.let { MovieAdapter(it, model.mapGenres.value) }!!
 
             val recyclerView = binding.recyclerMovies
             recyclerView.apply {
@@ -64,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         binding.imageHeart.setOnClickListener {
-            model.changeLike(binding.imageHeart)
+            model.likeClick(binding.imageHeart)
         }
     }
 }

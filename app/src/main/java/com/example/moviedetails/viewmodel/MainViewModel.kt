@@ -12,22 +12,24 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.moviedetails.BuildConfig
 import com.example.moviedetails.R
 import com.example.moviedetails.database.AppDatabase
-import com.example.moviedetails.model.Genres
 import com.example.moviedetails.model.Movie
 import com.example.moviedetails.model.SimilarMovie
-import com.example.moviedetails.service.*
+import com.example.moviedetails.service.DBRepositoryImplementation
+import com.example.moviedetails.service.dbApp
+import com.example.moviedetails.service.dbRepository
+import com.example.moviedetails.service.repository
 import kotlinx.coroutines.launch
 import java.util.*
 
-
 class MainViewModel : ViewModel() {
 
-    val API_KEY = BuildConfig.API_KEY
-    val LANGUAGE = "PT-BR"
+    private val API_KEY = BuildConfig.API_KEY
+    private val LANGUAGE = "PT-BR"
     val movie = MutableLiveData<Movie>()
     val listMovie = MutableLiveData<List<SimilarMovie>>()
-    lateinit var mapGenres: Map<Int, String>
     var liked = false
+    var dbInitialized = MutableLiveData(false)
+    var mapGenres = MutableLiveData<Map<Int, String>>()
 
     fun initializeDB(context: Context) {
 
@@ -37,6 +39,7 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             if (dbRepository.isEmptyDBService() == null) {
                 dbRepository.populateGenresDBService()
+                dbInitialized.value = true
             }
         }
     }
@@ -59,6 +62,13 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    fun popMapGenres() {
+        viewModelScope.launch {
+            val listGenres = dbRepository.getAllGenresDBService()
+            mapGenres.value = listGenres.map { it.id to it.name }.toMap()
+        }
+    }
+
     @BindingAdapter("imageUrl")
     fun loadImage(imageView: ImageView, url: String?) {
         Glide.with(imageView)
@@ -73,19 +83,12 @@ class MainViewModel : ViewModel() {
         return compactDecimalFormat.format(likeCount)
     }
 
-    fun changeLike(imageView: ImageView) {
+    fun likeClick(imageView: ImageView) {
         if (liked) {
             imageView.setImageResource(R.drawable.ic_baseline_favorite_24)
         } else {
             imageView.setImageResource(R.drawable.ic_baseline_favorite_border_24)
         }
         liked = !liked
-    }
-
-    fun popMapGenres() {
-        viewModelScope.launch {
-            val listGenres = dbRepository.getAllGenresDBService()
-            mapGenres = listGenres.map {it.id to it.name}.toMap()
-        }
     }
 }

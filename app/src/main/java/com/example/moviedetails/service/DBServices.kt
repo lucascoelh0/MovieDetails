@@ -10,7 +10,6 @@ interface DBRepository {
     suspend fun populateGenresDBService()
 
     //select
-    suspend fun getGenreDBService(id: Int): String
     suspend fun getAllGenresDBService(): List<Genres>
     suspend fun isEmptyDBService(): Int
 }
@@ -40,10 +39,6 @@ class DBRepositoryImplementation(val genresDAO: GenresDAO) : DBRepository {
             Genres(37, "Faroeste"),
         )
         genresDAO.populateGenres(genres)
-    }
-
-    override suspend fun getGenreDBService(id: Int): String {
-        return genresDAO.getGenre(id)
     }
 
     override suspend fun getAllGenresDBService(): List<Genres> {

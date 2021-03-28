@@ -11,7 +11,7 @@
         android:id="@+id/constraint_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="invisible">
 
         <com.bosphere.fadingedgelayout.FadingEdgeLayout
             android:id="@+id/fading_poster"
@@ -26,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/poster_placeholder"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </com.bosphere.fadingedgelayout.FadingEdgeLayout>
