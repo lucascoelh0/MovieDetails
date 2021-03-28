@@ -26,8 +26,8 @@ class MovieAdapter(
         fun bind(movie: SimilarMovie) {
             itemBinding.apply {
                 textTitle.text = movie.title
-                textYear.text =
-                    if (movie.release_date.isNotEmpty()) movie.release_date.take(4) else "TBA"
+
+                textYear.text = movie.release_date?.take(4) ?: "TBA"
 
                 val genresString =
                     movie.genre_ids

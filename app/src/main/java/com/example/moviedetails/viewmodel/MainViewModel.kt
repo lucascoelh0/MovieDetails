@@ -62,7 +62,7 @@ class MainViewModel : ViewModel() {
     @BindingAdapter("imageUrl")
     fun loadImage(imageView: ImageView, url: String?) {
         Glide.with(imageView)
-            .load("https://image.tmdb.org/t/p/w500/$url")
+            .load("https://image.tmdb.org/t/p/w780/$url")
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(imageView)
     }

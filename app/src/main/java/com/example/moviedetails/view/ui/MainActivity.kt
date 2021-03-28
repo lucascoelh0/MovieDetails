@@ -1,6 +1,8 @@
 package com.example.moviedetails.view.ui
 
+import android.opengl.Visibility
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
@@ -56,6 +58,9 @@ class MainActivity : AppCompatActivity() {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 setHasFixedSize(true)
             }
+
+            binding.constraintProgress.visibility = View.GONE
+            binding.constraintContent.visibility = View.VISIBLE
         })
 
         binding.imageHeart.setOnClickListener {

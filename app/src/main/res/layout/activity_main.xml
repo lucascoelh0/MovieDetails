@@ -7,95 +7,129 @@
     android:background="@color/background"
     tools:context=".view.ui.MainActivity">
 
-    <ImageView
-        android:id="@+id/image_poster"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_content"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/poster_placeholder"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
-    <TextView
-        android:id="@+id/text_title"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/a_movie_title"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_poster" />
+        <com.bosphere.fadingedgelayout.FadingEdgeLayout
+            android:id="@+id/fading_poster"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            app:fel_edge="bottom"
+            app:fel_size_bottom="30dp"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/image_likes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:src="@drawable/ic_baseline_favorite_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_title" />
+            <ImageView
+                android:id="@+id/image_poster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/poster_placeholder"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_like_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="@string/likes_number"
-        app:layout_constraintBottom_toBottomOf="@+id/image_likes"
-        app:layout_constraintStart_toEndOf="@id/image_likes"
-        app:layout_constraintTop_toTopOf="@+id/image_likes" />
+        </com.bosphere.fadingedgelayout.FadingEdgeLayout>
 
-    <TextView
-        android:id="@+id/text_likes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="@string/likes"
-        app:layout_constraintStart_toEndOf="@id/text_like_count"
-        app:layout_constraintTop_toTopOf="@id/text_like_count" />
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/a_movie_title"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fading_poster" />
 
-    <ImageView
-        android:id="@+id/image_popularity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:src="@drawable/ic_baseline_star_24"
-        app:layout_constraintBottom_toBottomOf="@+id/text_likes"
-        app:layout_constraintStart_toEndOf="@id/text_likes"
-        app:layout_constraintTop_toTopOf="@+id/text_likes" />
+        <ImageView
+            android:id="@+id/image_likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_baseline_favorite_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_title" />
 
-    <TextView
-        android:id="@+id/text_popularity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="@string/_10_849"
-        app:layout_constraintBottom_toBottomOf="@id/image_popularity"
-        app:layout_constraintStart_toEndOf="@id/image_popularity"
-        app:layout_constraintTop_toTopOf="@id/image_popularity" />
+        <TextView
+            android:id="@+id/text_like_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/likes_number"
+            app:layout_constraintBottom_toBottomOf="@+id/image_likes"
+            app:layout_constraintStart_toEndOf="@id/image_likes"
+            app:layout_constraintTop_toTopOf="@+id/image_likes" />
 
-    <ImageView
-        android:id="@+id/image_heart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
-        android:src="@drawable/ic_baseline_favorite_border_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_poster" />
+        <TextView
+            android:id="@+id/text_likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/likes"
+            app:layout_constraintStart_toEndOf="@id/text_like_count"
+            app:layout_constraintTop_toTopOf="@id/text_like_count" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_movies"
+        <ImageView
+            android:id="@+id/image_popularity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/ic_baseline_star_24"
+            app:layout_constraintBottom_toBottomOf="@+id/text_likes"
+            app:layout_constraintStart_toEndOf="@id/text_likes"
+            app:layout_constraintTop_toTopOf="@+id/text_likes" />
+
+        <TextView
+            android:id="@+id/text_popularity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/_10_849"
+            app:layout_constraintBottom_toBottomOf="@id/image_popularity"
+            app:layout_constraintStart_toEndOf="@id/image_popularity"
+            app:layout_constraintTop_toTopOf="@id/image_popularity" />
+
+        <ImageView
+            android:id="@+id/image_heart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/ic_baseline_favorite_border_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fading_poster" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_movies"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            android:paddingStart="15dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_likes"
+            tools:listitem="@layout/item_movie" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_progress"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="15dp"
-        android:paddingStart="15dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/image_likes"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/item_movie" />
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

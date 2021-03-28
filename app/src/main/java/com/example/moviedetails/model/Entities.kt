@@ -20,7 +20,7 @@ data class SimilarMoviesList(
 
 data class SimilarMovie(
     val genre_ids: List<Int>,
-    val poster_path: String,
-    val release_date: String,
+    val poster_path: String ?= null,
+    val release_date: String?,
     val title: String,
 )
